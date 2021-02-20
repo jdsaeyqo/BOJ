@@ -16,7 +16,7 @@ public class BOJ_1012 {
 	
 	
 		
-		static boolean dfs(int x, int y){
+	static boolean dfs(int x, int y){
 		if(x < 0 || x >= row || y < 0 || y >= col) return false;
 		
 		if(map[x][y] == 0) return false;
@@ -60,7 +60,7 @@ public static void main(String[] args) throws IOException {
 		int cnt = 0;
 		for (int k = 0; k < row; k++) {
 			for (int k2 = 0; k2 < col; k2++) {
-;
+	
 				if(dfs(k,k2))cnt++;
 			}
 			}
