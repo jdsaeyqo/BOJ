@@ -9,45 +9,31 @@ public class home_number {
 	
 	static int row,col;
 	static int[][] map;
-	static boolean[][] visit_cnt;
-	static boolean[][] visit_num;
+	static boolean[][] visit;
+	static int[] dx = {1,0,-1,0};
+	static int[] dy = {0,1,0,-1};
+
 	
-	
-	static boolean dfs_cnt(int x, int y) {
-		
-		if(x < 0 || x >= row || y < 0 || y >= col) return false;
-				
-		if(map[x][y] == 1 && visit_cnt[x][y] == false) {
-			visit_cnt[x][y] = true;
-			dfs_cnt(x-1,y);
-			dfs_cnt(x+1,y);
-			dfs_cnt(x,y-1);
-			dfs_cnt(x,y+1);
-			return true;
-		}
-		
-		return false;
-	}
-	
-	static int dfs_num(int x, int y) {
-		
-		if(x < 0 || x >= row || y < 0 || y >= col) return 0;
+	static int dfs(int x, int y) {
 		
 		int num = 1;
 		
-		if(map[x][y] == 1 && visit_num[x][y] == false) {
-			visit_num[x][y] = true;
-			num+=dfs_num(x-1,y);
-			num+=dfs_num(x+1,y);
-			num+=dfs_num(x,y-1);
-			num+=dfs_num(x,y+1);
-			return num;
-		}
+		visit[x][y] = true;
 		
-		return 0;
+		for (int i = 0; i < 4; i++) {
+			
+			int newX = x + dx[i];
+			int newY = y + dy[i];
+			
+			if(newX >= 0 && newX < row && newY >= 0 && newY < col) {
+				if(map[newX][newY] == 1 && visit[newX][newY] == false) {
+					num+=dfs(newX,newY);
+				}
+			}
+		}
+				
+		return num;
 	}
-	
-	
 	
 	public static void main(String[] args) throws Exception {
 		
@@ -58,8 +44,7 @@ public class home_number {
 		row = size; 
 		col = size;
 		map = new int[row][col];
-		visit_cnt = new boolean[row][col];
-		visit_num = new boolean[row][col];
+		visit = new boolean[row][col];
 		
 		for (int i = 0; i < row; i++) {
 			String s = br.readLine();
@@ -69,52 +54,28 @@ public class home_number {
 
 		}
 		
-		int cnt = 0;
-	
-		for (int i = 0; i < row; i++) {
-		for (int j = 0; j < col; j++) {
-			if(dfs_cnt(i,j)) cnt++;
-		}
+		ArrayList<Integer> arr = new ArrayList<>();
 		
-	}
-	System.out.println(cnt);
-	
-	ArrayList<Integer> arr = new ArrayList<>();
-	for (int i = 0; i < row; i++) {
-		for (int j = 0; j < col; j++) {
-			int ans = dfs_num(i,j);
-			if(ans!=0) {
-				arr.add(ans);
+		int cnt = 0;
+		int sum = 0;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+			if(map[i][j] == 1 && visit[i][j] == false) {
+				sum = dfs(i, j);
+				arr.add(sum);
+				sum = 0;
+				cnt++;
 			}
 		}
 		
 	}
+	System.out.println(cnt);
 
 	Collections.sort(arr);
 	
 	for (int i = 0; i < arr.size(); i++) {
 		System.out.println(arr.get(i));
 	}
-	
-//	int[] arr = new int[cnt];
-//	
-//	int num = 0;
-//	for (int i = 0; i < row; i++) {
-//		for (int j = 0; j < col; j++) {
-//			int ans = dfs_num(i,j);
-//			if(ans != 0 ) {
-//				arr[num] = ans;
-//				num++;
-//			}
-//		}
-//		
-//	}
-
-//	Arrays.sort(arr);
-//	for (int i = 0; i < arr.length; i++) {
-//		System.out.println(arr[i]);
-//	}
-	
 	
 }
 
