@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 class cnt{
+	
 	int zero;
 	int one;
 	
@@ -27,6 +28,7 @@ class cnt{
 		return this.zero +" "+this.one;
 	}
 }
+
 
 public class fibonacci {
 	
