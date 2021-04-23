@@ -22,9 +22,9 @@ public class maze_ {
 		
 		while(!q.isEmpty()) {
 			
-			int cur_x = q.peek()[0];
-			int cur_y = q.peek()[1];
-			q.poll();
+			int[] qu = q.poll();
+			int cur_x = qu[0];
+			int cur_y = qu[1];
 			
 			for (int i = 0; i < dir.length; i++) {
 				int new_x = cur_x + dir[i][0];
