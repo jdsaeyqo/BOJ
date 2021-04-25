@@ -75,6 +75,8 @@ public class new_employee {
 			}
 		});
 		
+		 
+		
 		int win = list.get(0).score2;
 		
 		
