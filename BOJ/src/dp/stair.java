@@ -1,10 +1,4 @@
 package dp;
-/*
-0	0	10	20	15	25	10	20
-0	0	0	30	35	50	65	65
-0	0	10	20	25	55	45	75
-
-*/
 
 import java.io.BufferedReader;
 import java.io.IOException;
